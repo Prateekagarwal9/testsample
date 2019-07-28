@@ -153,22 +153,22 @@ def execute_all_func(form_data):
         
         #test324.main(workspaceurl, accesstoken)
 
-        #os.system("python3 databricks_linux/test324.py {} {}".format(workspaceurl, accesstoken))
+        os.system("python3 /home/site/wwwroot/azure_blob_App/databricks_linux/test324.py {} {}".format(workspaceurl, accesstoken))
 
-        with open(os.path.join(BASE_DIR, "KeyVaultParameters.json"), "w") as f:
-            f.write(json.dumps(dic2))
+        #with open(os.path.join(BASE_DIR, "KeyVaultParameters.json"), "w") as f:
+         #   f.write(json.dumps(dic2))
 
-        container_name = 'marketplacecodes'
-        blob_name = 'ADFParameters.json'
-        blob_client = BlockBlobService(connection_string=connectstring)
-        resp = blob_client.create_blob_from_path(container_name=container_name, blob_name=blob_name,
-                                                 file_path=os.path.join(BASE_DIR, "ADFParameters.json"))
-        blob_name = 'KeyVaultParameters.json'
-        resp = blob_client.create_blob_from_path(container_name=container_name, blob_name=blob_name,
-                                                 file_path=os.path.join(BASE_DIR, "KeyVaultParameters.json"))
-        obj = Deployer(resource_group, subscription_id, azure_client_id, azure_client_secret, azure_tenant_id)
-        print(obj.deploy("DataFactoryDeployment.json", "ADFParameters.json", connectstring))
-        print(obj.deploy("KeyVaultDeployment.json", "KeyVaultParameters.json", connectstring))
+       # container_name = 'marketplacecodes'
+       # blob_name = 'ADFParameters.json'
+       # blob_client = BlockBlobService(connection_string=connectstring)
+       # resp = blob_client.create_blob_from_path(container_name=container_name, blob_name=blob_name,
+        #                                         file_path=os.path.join(BASE_DIR, "ADFParameters.json"))
+       # blob_name = 'KeyVaultParameters.json'
+        #resp = blob_client.create_blob_from_path(container_name=container_name, blob_name=blob_name,
+         #                                        file_path=os.path.join(BASE_DIR, "KeyVaultParameters.json"))
+        #obj = Deployer(resource_group, subscription_id, azure_client_id, azure_client_secret, azure_tenant_id)
+        #print(obj.deploy("DataFactoryDeployment.json", "ADFParameters.json", connectstring))
+        #print(obj.deploy("KeyVaultDeployment.json", "KeyVaultParameters.json", connectstring))
     except KeyError as k:
         logger.error(str(k))
         error_flag = True
